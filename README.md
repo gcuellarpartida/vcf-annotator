@@ -20,6 +20,16 @@ write.table(anno, file="annotated_vcf.tsv", quote=F, row.names=F, col.names=T, s
 Try the live REST API:
 
 Launch your own REST API:
+```R
+library(plumber)
+r<-plumb("api.R")
+r$run(port=8888)
+```
+
+Test it:
+```bash
+curl -v -F upload=@challange.vcf http://localhost:8888/annotate-vcf >annotated_vcf.tsv
+```
 
 ## Output
 
@@ -44,13 +54,12 @@ The resuts .tsv file contains the following tab separated columns:
 ## Dependencies
 
 This has been tested in [R 4.0.3] and requires the following libraries:
-* plumber
-* jsonlite
-* httr
-* VariantAnnotation
-* BSgenome.Hsapiens.UCSC.hg19
-* TxDb.Hsapiens.UCSC.hg19.knownGene
-* org.Hs.eg.db
+* plumber (1.0.0)
+* jsonlite (1.6.0)
+* httr (1.4.1)
+* VariantAnnotation (1.36.0)
+* BSgenome.Hsapiens.UCSC.hg19 (1.4.3)
+* TxDb.Hsapiens.UCSC.hg19.knownGene (3.2.0)
 
 In R:
 
@@ -64,5 +73,4 @@ In R:
  BiocManager::install("TxDb.Hsapiens.UCSC.hg19.knownGene")
  BiocManager::install('snpStats')
  BiocManager::install('BSgenome.Hsapiens.UCSC.hg19')
- BiocManager::install('org.Hs.eg.db')
 ```

@@ -1,7 +1,6 @@
 library(plumber)
 source("./vcf-annotation.R")
 
-
 #* @filter cors
 cors <- function(req,res) {
     res$setHeader("Access-Control-Allow-Origin", "*")
@@ -18,6 +17,7 @@ cors <- function(req,res) {
 }
 
 #' @post /annotate-vcf
+#' @serializer tsv
 function(req){
   multipart <- mime::parse_multipart(req)
   #in_file <- multipart$upload$name
