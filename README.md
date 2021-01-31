@@ -17,7 +17,10 @@ anno<-annotateVCF("challange.vcf")
 write.table(anno, file="annotated_vcf.tsv", quote=F, row.names=F, col.names=T, sep="\t")
 ```
 
-Try the live REST API:
+Try the live REST API at https://genoma.io:
+```bash
+curl -v -F upload=@challange.vcf http://tools.genoma.io/annotate-vcf >annotated_vcf.tsv
+``` 
 
 Launch your own REST API:
 ```R
@@ -55,10 +58,10 @@ The resuts .tsv file contains the following tab separated columns:
 
 This has been tested in [R 4.0.3] and requires the following libraries:
 * plumber (1.0.0)
+* readr (1.4.0)
 * jsonlite (1.6.0)
 * httr (1.4.1)
 * VariantAnnotation (1.36.0)
-* BSgenome.Hsapiens.UCSC.hg19 (1.4.3)
 * TxDb.Hsapiens.UCSC.hg19.knownGene (3.2.0)
 
 In R:
@@ -66,11 +69,11 @@ In R:
 ```R
  install.packages("plumber")
  install.packages("jsonlite")
+  install.packages("readr")
  install.packages("httr")
  if (!requireNamespace("BiocManager", quietly = TRUE))
      install.packages("BiocManager")
  BiocManager::install("VariantAnnotation")
  BiocManager::install("TxDb.Hsapiens.UCSC.hg19.knownGene")
  BiocManager::install('snpStats')
- BiocManager::install('BSgenome.Hsapiens.UCSC.hg19')
 ```
